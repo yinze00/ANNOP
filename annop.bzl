@@ -163,6 +163,18 @@ def tf_gen_op_wrapper_cc(
             )
         api_def_args_str = ",".join(api_def_args)
 
+    print("++++++ 1 ++++++ ", tool)
+    print("+++ ", op_gen)
+    print("++++++ 2 ++++++ ", include_internal_ops)
+
+    ccmd = ("$(location :" + tool + ") $(location :" + out_ops_file + ".h) " +
+               "$(location :" + out_ops_file + ".cc) " +
+               str(include_internal_ops) + " " + api_def_args_str)
+
+    print("++++++ 3 ++++++ ", srcs)
+
+    print("++++++ 4 ++++++ ", ccmd)
+    
     native.genrule(
         name = name + "_genrule",
         outs = [
@@ -188,7 +200,9 @@ def tf_gen_op_wrappers_cc(
         other_srcs_internal = [],
         other_hdrs_internal = [],
         pkg = "",
-        deps = [],
+        deps = [
+            clean_dep("@tensorflow//:tensorflow_cc")
+        ],
         deps_internal = [],
         op_gen = clean_dep("@tensorflow//:cc_op_gen_main"),
         include_internal_ops = 0,
@@ -204,17 +218,17 @@ def tf_gen_op_wrappers_cc(
     for n in op_lib_names:
         tf_gen_op_wrapper_cc(
             n,
-            "ops/" + n,
+            "annops/" + n,
             api_def_srcs = api_def_srcs,
             include_internal_ops = include_internal_ops,
             op_gen = op_gen,
             pkg = pkg,
             deps = [pkg + ":" + n + "_op_lib"] + extra_gen_deps,
         )
-        subsrcs += ["ops/" + n + ".cc"]
-        subhdrs += ["ops/" + n + ".h"]
-        internalsrcs += ["ops/" + n + "_internal.cc"]
-        internalhdrs += ["ops/" + n + "_internal.h"]
+        subsrcs += ["annops/" + n + ".cc"]
+        subhdrs += ["annops/" + n + ".h"]
+        internalsrcs += ["annops/" + n + "_internal.cc"]
+        internalhdrs += ["annops/" + n + "_internal.h"]
 
     native.cc_library(
         name = name,
