@@ -38,7 +38,7 @@ int main() {
                               //  Op
 
   // auto z = ZeroOutOp(root.WithOpName("z"), v);
-  auto final = TimeTwo(root.WithOpName("final"), v);
+  auto final = TimeThree(root.WithOpName("final"), v);
   std::vector<Tensor> outputs;
   ClientSession session(root);
   // Run and fetch v

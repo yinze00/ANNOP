@@ -71,6 +71,7 @@ cc_library(
         "//annop/cc:annop_ops_op_lib",
         # "//annop/cc:annop_ops_op_lib",
         "//annop/cc:time_two_ops_op_lib",
+        # "//annop/cc:time_three_ops_op_lib",
         "@tensorflow"
     ]
 )

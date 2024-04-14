@@ -26,10 +26,24 @@ tf_kernel_library(
     ]
 )
 
+tf_kernel_library(
+    name = "time_three_op",
+    srcs = [
+        "time_three_op.cc"
+    ],
+    hdrs = [
+        "time_three_op.h"
+    ],
+    deps = [
+        "@tensorflow//:tensorflow"
+    ]
+)
+
 cc_library(
     name = "ann_kernel",
     deps = [
         ":time_two_op",
+        ":time_three_op",
         ":zero_out_op"
     ]
 )
