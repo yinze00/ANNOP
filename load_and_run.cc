@@ -29,9 +29,8 @@ DEFINE_string(modelpath,
               "testdata/half_plus_two_pbtxt/00000123/",
               "sdf");
 
-
 int main(int argc, char **argv) {
-  ops::TimeTwo tt;
+  // ops::TimeTwo tt;
   gflags::ParseCommandLineFlags(&argc, &argv, true);
   printf("All registered ops:\n%s\n",
          tensorflow::OpRegistry::Global()->DebugString(false).c_str());
@@ -56,5 +55,24 @@ int main(int argc, char **argv) {
   tensor.vec<float>()(0) = 20.f;
   tensor.vec<float>()(1) = 6000.f;
 
+  // Link the data with some tags so tensorflow know where to put those data
+  // entries.
+  std::vector<std::pair<std::string, tensorflow::Tensor>> feedInputs = {
+      {"user_emb", tensor}};
+  std::vector<std::string> fetches = {"bb"};
+
+  // We need to store the results somewhere.
+  std::vector<tensorflow::Tensor> outputs;
+
+  // Let's run the model...
+  // bundle->session
+  auto status = bundle->session->Run(feedInputs, fetches, {}, &outputs);
+
+  TF_CHECK_OK(status);
+
+  // ... and print out it's predictions.
+  for (const auto &record : outputs) {
+    LOG(INFO) << record.DebugString();
+  }
   return 0;
 }

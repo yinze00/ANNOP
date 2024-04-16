@@ -24,7 +24,7 @@ meta_graphs {
     }
     node {
       name: "aa"
-      op: "TimesTwo"
+      op: "TimeTwo"
       attr {
         key: "T"
         value {
@@ -35,14 +35,14 @@ meta_graphs {
     }
     node {
       name: "bb"
-      op: "TimesTwo"
+      op: "TimeThree"
       attr {
         key: "T"
         value {
           type: DT_FLOAT
         }
       }
-      input: "bb"
+      input: "aa"
     }
   }
 }
