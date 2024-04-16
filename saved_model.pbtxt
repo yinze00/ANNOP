@@ -1,0 +1,48 @@
+saved_model_schema_version: 1
+meta_graphs {
+  meta_info_def {
+    tags: "serve"
+  }
+  graph_def {
+    node {
+      name: "user_emb"
+      op: "Placeholder"
+      attr {
+        key: "dtype"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      attr {
+        key: "shape"
+        value {
+          shape {
+            unknown_rank: true
+          }
+        }
+      }
+    }
+    node {
+      name: "aa"
+      op: "TimesTwo"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      input: "user_emb"
+    }
+    node {
+      name: "bb"
+      op: "TimesTwo"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      input: "bb"
+    }
+  }
+}

@@ -68,9 +68,9 @@ cc_library(
         # "//annop/cc:annop_ops_cc",
         "//annop/cc/kernel:ann_kernel",
         "//annop/cc:annop_ops",
-        "//annop/cc:annop_ops_op_lib",
+        "//annop/cc:ops",
         # "//annop/cc:annop_ops_op_lib",
-        "//annop/cc:time_two_ops_op_lib",
+        # "//annop/cc:time_two_ops_op_lib",
         # "//annop/cc:time_three_ops_op_lib",
         "@tensorflow"
     ]

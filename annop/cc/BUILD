@@ -29,6 +29,15 @@ tf_gen_op_wrappers_cc(
     ],
 )
 
+cc_library(
+    name = "ops",
+    visibility = ["//visibility:public"],
+    deps = [
+        "time_two_ops_op_lib",
+        "annop_ops_op_lib"
+    ],
+    alwayslink = 1,
+)
 
 
 # cc_library(

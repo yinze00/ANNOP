@@ -230,6 +230,8 @@ def tf_gen_op_wrappers_cc(
         internalsrcs += ["annops/" + n + "_internal.cc"]
         internalhdrs += ["annops/" + n + "_internal.h"]
 
+    print("SRCS = ", subsrcs)
+    print("HDRS = ", subhdrs)
     native.cc_library(
         name = name,
         srcs = subsrcs,

@@ -12,8 +12,8 @@
 #include "tensorflow/core/lib/io/path.h"
 #include <tensorflow/cc/client/client_session.h>
 // #include "annop/kernel/ZeroOutOp.h"
-#include "annop/cc/annops/time_two_ops.h"
 #include "annop/cc/annops/annop_ops.h"
+#include "annop/cc/annops/time_two_ops.h"
 #include <tensorflow/cc/ops/math_ops.h>
 
 #include <iostream>
@@ -24,8 +24,8 @@ int main() {
   using namespace tensorflow;
   using namespace tensorflow::ops;
 
-  // printf("All registered ops:\n%s\n",
-  //        tensorflow::OpRegistry::Global()->DebugString(true).c_str());
+  printf("All registered ops:\n%s\n",
+         tensorflow::OpRegistry::Global()->DebugString(false).c_str());
   Scope root = Scope::NewRootScope();
   // Matrix A = [3 2; -1 0]
   auto A = Const(root, {{3.f, 2.f}, {-1.f, 0.f}});
