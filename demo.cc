@@ -24,8 +24,8 @@ int main() {
   using namespace tensorflow;
   using namespace tensorflow::ops;
 
-  printf("All registered ops:\n%s\n",
-         tensorflow::OpRegistry::Global()->DebugString(false).c_str());
+  // printf("All registered ops:\n%s\n",
+  //        tensorflow::OpRegistry::Global()->DebugString(false).c_str());
   Scope root = Scope::NewRootScope();
   // Matrix A = [3 2; -1 0]
   auto A = Const(root, {{3.f, 2.f}, {-1.f, 0.f}});
@@ -38,7 +38,9 @@ int main() {
                               //  Op
 
   // auto z = ZeroOutOp(root.WithOpName("z"), v);
-  auto final = TimeThree(root.WithOpName("final"), v);
+  auto c = TimeTwo(root.WithOpName("c"), v);
+  auto final = TimeThree(root.WithOpName("final"), c);
+
   std::vector<Tensor> outputs;
   ClientSession session(root);
   // Run and fetch v

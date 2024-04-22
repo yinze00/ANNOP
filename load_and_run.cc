@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
   // entries.
   std::vector<std::pair<std::string, tensorflow::Tensor>> feedInputs = {
       {"user_emb", tensor}};
-  std::vector<std::string> fetches = {"bb"};
+  std::vector<std::string> fetches = {"dd"};
 
   // We need to store the results somewhere.
   std::vector<tensorflow::Tensor> outputs;

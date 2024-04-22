@@ -43,6 +43,28 @@ meta_graphs {
         }
       }
       input: "aa"
+    },
+    node {
+      name: "cc"
+      op: "TimeTwo"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      input: "bb"
+    },
+    node {
+      name: "dd"
+      op: "TimeTwo"
+      attr {
+        key: "T"
+        value {
+          type: DT_FLOAT
+        }
+      }
+      input: "cc"
     }
   }
 }
