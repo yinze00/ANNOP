@@ -1,14 +1,16 @@
 /*
  * @Description: Singleton for stateful data
  * @Author: junwei.wang@zju.edu.cn
- * @Date: 2024-04-21 15:46:05
- * @LastEditTime: 2024-04-21
+ * @Date: 2024-04-01 15:46:05
+ * @LastEditTime: 2024-04-01
  */
 
 #pragma once
 
+#include <iostream>
 #include <memory>
 #include <mutex>
+
 namespace annop {
 namespace common {
 
@@ -23,10 +25,10 @@ class Singleton {
         return *instance_;
     }
 
-    // static T* instance() {
-    //     std::call_once(initflags, &Singleton::initSingleton);
-    //     return instance_;
-    // }
+    static T* pinstance() {
+        std::call_once(initflags, &Singleton::initSingleton);
+        return instance_;
+    }
 
   private:
     Singleton() = default;
@@ -50,7 +52,7 @@ class CSingleton {
                     instance_ = new Type();
                 } catch (...) {
                     instance_ = NULL;
-                    LOG(ERROR) << "Singleton::m_instance new exception";
+                    std::cerr << "Singleton::m_instance new exception";
                 }
             }
             destructor_.nothing();  // force m_destructor to instantiated
@@ -67,7 +69,7 @@ class CSingleton {
                     instance_ = new Type(arg1);
                 } catch (...) {
                     instance_ = NULL;
-                    LOG(ERROR) << "Singleton::m_instance new exception";
+                    std::cerr << "Singleton::m_instance new exception";
                 }
             }
             destructor_.nothing();  // force m_destructor to instantiated
@@ -83,7 +85,7 @@ class CSingleton {
                     instance_ = new Type(arg1, arg2);
                 } catch (...) {
                     instance = NULL;
-                    LOG(ERROR) << "Singleton::m_instance new exception";
+                    std::cerr << "Singleton::m_instance new exception";
                 }
             }
             destructor_.nothing();  // force m_destructor to instantiated
@@ -100,7 +102,7 @@ class CSingleton {
                     instance_ = new Type(arg1, arg2, arg3);
                 } catch (...) {
                     instance_ = NULL;
-                    LOG(ERROR) << "Singleton::m_instance new exception";
+                    std::cerr << "Singleton::m_instance new exception";
                 }
             }
             destructor_.nothing();  // force m_destructor to instantiated
@@ -117,7 +119,7 @@ class CSingleton {
                     instance_ = new Type(arg1, arg2, arg3, arg4);
                 } catch (...) {
                     instance_ = NULL;
-                    LOG(ERROR) << "Singleton::m_instance new exception";
+                    std::cerr << "Singleton::m_instance new exception";
                 }
             }
             destructor_.nothing();  // force m_destructor to instantiated

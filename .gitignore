@@ -4,3 +4,4 @@ build/
 .cache/
 *.so
 demo
+compile_commands.json
