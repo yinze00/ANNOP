@@ -1,5 +1,7 @@
+#! /usr/local/bin/python3.9
 import faiss
 import numpy as np
+import tensorflow as tf
 
 if __name__ == '__main__':
     d = 64                           # dimension
@@ -27,7 +29,7 @@ if __name__ == '__main__':
     # index.add(nb, xb)
     index.add(xb)
 
-    faiss.write_index(index, "./hnsw.dat")
+    # faiss.write_index(index, "./hnsw.dat")
 
     # index.
 

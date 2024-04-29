@@ -39,6 +39,14 @@ tf_kernel_library(
     ]
 )
 
+tf_kernel_library(
+    name = "gather_neighbors",
+    prefix = "gather_neighbors",
+    deps = [
+        "@tensorflow//:tensorflow"
+    ]
+)
+
 cc_library(
     name = "ann_kernel",
     deps = [

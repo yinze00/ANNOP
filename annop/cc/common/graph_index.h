@@ -15,7 +15,7 @@
 namespace annop {
 namespace common {
 
-template <typename T, typename U>
+// template <typename T, typename U>
 struct GraphIndex : public Index<T, U> {
     using Inner_ID_Type = typename Index<T, U>::Inner_ID_Type;
     using Index<T, U>::dim_;
@@ -52,7 +52,7 @@ struct GraphIndex : public Index<T, U> {
     std::vector<Inner_ID_Type> neighbors;  // neighbors of every
 
     std::vector<int> levels;  // levels per piont
-    std::vector<int> Mlevel0
+    std::vector<int> Mlevel0;
 };
 }  // namespace common
 }  // namespace annop

@@ -5,3 +5,5 @@ build/
 *.so
 demo
 compile_commands.json
+saved_model/
+*.def
