@@ -6,6 +6,8 @@
  */
 #include "index.h"
 
+#include <cstdint>
+
 #include "tensorflow/core/framework/types.h"
 
 namespace annop {
@@ -14,9 +16,17 @@ namespace common {
 template <typename T>
 class IndexBuffer : public Buffer {
   public:
-    explicit IndexBuffer(int64_t n, int dim) : Buffer(nullptr) {}
+    explicit IndexBuffer(int64_t n)
+        : Buffer(new int8_t[n * sizeof(T)]), n_(n) {}
+    ~IndexBuffer() {
+        if (void* p = data()) {
+            delete reinterpret_cast<int8_t*>(p);
+        }
+    }
+    size_t size() { return n_ * sizeof(T); }
 
   private:
+    int64_t n_;
 };
 
 using namespace tensorflow;
@@ -55,7 +65,7 @@ using namespace tensorflow;
 Embedding::Embedding(DataType type, int64_t n, int dim)
     : type_(type), n_(n), dim_(dim) {
     if (n_ * dim_ > 0) {
-        CASES(type_, buf_ = new IndexBuffer<T>(n_, dim_));
+        CASES(type_, buf_ = new IndexBuffer<T>(n_ * dim_));
     }
 }
 

@@ -32,6 +32,8 @@ class Buffer : tensorflow::core::RefCounted {
         return reinterpret_cast<T*>(data());
     }
 
+    tensorflow::DataType type() const noexcept { return dtype_; }
+
   private:
     tensorflow::DataType dtype_{tensorflow::DataType::DT_INT8};
     void* const data_;
@@ -51,10 +53,10 @@ class Graph {};
 
 class AIndex {
   public:
-    explicit AIndex() {}
+    explicit AIndex(int n, int dim) {}
 
   private:
-    Buffer* buf_;
+    Embedding embedding_;
 };
 
 template <typename T, typename U>
