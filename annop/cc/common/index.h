@@ -12,50 +12,27 @@
 #include <string>
 #include <vector>
 
+#include "embedding.h"
+#include "graph.hpp"
 #include "tensorflow/core/framework/types.pb.h"
 #include "tensorflow/core/lib/core/refcount.h"
+
+#include "tensorflow/core/framework/resource_mgr.h"
 
 namespace annop {
 namespace common {
 
-using DataType = tensorflow::DataType;
-//
-class Buffer : tensorflow::core::RefCounted {
-  public:
-    explicit Buffer(void* data_ptr) : data_(data_ptr) {}
-    ~Buffer() {}
+struct IndexConfig {
 
-    void* data() const noexcept { return data_; }
-
-    template <typename T>
-    T* base() const noexcept {
-        return reinterpret_cast<T*>(data());
-    }
-
-    tensorflow::DataType type() const noexcept { return dtype_; }
-
-  private:
-    tensorflow::DataType dtype_{tensorflow::DataType::DT_INT8};
-    void* const data_;
 };
-
-class Embedding {
-  public:
-    explicit Embedding(DataType type, int64_t n, int dim);
-
-  private:
-    Buffer* buf_;
-    DataType type_;
-    int64_t n_;
-    int dim_;
-};
-class Graph {};
-
 class AIndex {
   public:
-    explicit AIndex(int n, int dim) {}
+    AIndex(const std::string& name, const IndexConfig&);
+    AIndex(int n, int dim);
 
   private:
+    std::string name_{"default"};
+    HGraph neis_;
     Embedding embedding_;
 };
 
