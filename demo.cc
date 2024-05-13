@@ -20,6 +20,8 @@
 using namespace std;
 using namespace tensorflow;
 
+// using tensorflow::core::Arena;
+
 int main() {
   using namespace tensorflow;
   using namespace tensorflow::ops;

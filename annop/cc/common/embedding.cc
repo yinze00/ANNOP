@@ -5,7 +5,7 @@
  * @LastEditTime: 2024-04-08
  */
 
-#include "embedding.h"
+#include "embedding.hh"
 
 #include "tensorflow/core/framework/types.h"
 
@@ -64,11 +64,15 @@ using namespace tensorflow;
 /*
  * class embedding ctor
  */
-Embedding::Embedding(DataType type, int64_t n, int dim)
+EmbeddingHolder::EmbeddingHolder(DataType type, int64_t n, int dim)
     : type_(type), n_(n), dim_(dim) {
     if (n_ * dim_ > 0) {
         CASES(type_, buf_ = new IndexBuffer<T>(n_ * dim_));
     }
+}
+
+Embedding EmbeddingHolder::gather_embedding(int64_t offset) {
+    
 }
 
 }  // namespace common
