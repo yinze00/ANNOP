@@ -7,7 +7,9 @@
 
 #pragma once
 
+#include <cstddef>
 #include <cstdint>
+
 #include "buffer.hh"
 #include "tensorflow/core/framework/types.pb.h"
 #include "tensorflow/core/lib/core/refcount.h"
@@ -15,19 +17,19 @@
 namespace annop {
 namespace common {
 
-
 class Embedding : public Buffer {
-public:
-  DataType type;
-  
+  public:
+    DataType type;
 };
 
 class EmbeddingHolder {
   public:
-    EmbeddingHolder() = default;
+    EmbeddingHolder() = delete;
     EmbeddingHolder(DataType type, int64_t n, int dim);
+    ~EmbeddingHolder();
 
-    Embedding gather_embedding(int64_t offset);
+    // template <typename T>
+    float* gather_embedding(int64_t offset);
 
   private:
     Buffer* buf_;

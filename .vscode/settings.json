@@ -1,5 +1,7 @@
 {
     "bazel-cpp-tools.compileCommands.targets": [
-        ":demo"
+        "//annop/cc/common:common",
+        ":demo",
+        ":load_and_run"
     ]
   }

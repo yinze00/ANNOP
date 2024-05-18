@@ -28,3 +28,19 @@ cc_binary(
         # "@tensorflow"
     ],
 )
+
+cc_binary(
+    name = "hnsw",
+    srcs = ["hnsw.cc"],
+    copts = [
+        "-g -O1",
+    ],
+    linkopts = [
+        "-lgflags"
+    ],
+    deps = [
+        "//annop:annop",
+        "//annop/cc:time_two_ops_op_lib",
+        # "@tensorflow"
+    ],
+)

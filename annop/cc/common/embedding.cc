@@ -8,6 +8,7 @@
 #include "embedding.hh"
 
 #include "tensorflow/core/framework/types.h"
+#include "tensorflow/core/platform/types.h"
 
 namespace annop {
 namespace common {
@@ -61,9 +62,7 @@ using namespace tensorflow;
     CASES_WITH_DEFAULT(TYPE_ENUM, STMTS, LOG(FATAL) << "Type not set"; \
                        , LOG(FATAL) << "Unexpected type: " << TYPE_ENUM;)
 
-/*
- * class embedding ctor
- */
+// ctor
 EmbeddingHolder::EmbeddingHolder(DataType type, int64_t n, int dim)
     : type_(type), n_(n), dim_(dim) {
     if (n_ * dim_ > 0) {
@@ -71,8 +70,17 @@ EmbeddingHolder::EmbeddingHolder(DataType type, int64_t n, int dim)
     }
 }
 
-Embedding EmbeddingHolder::gather_embedding(int64_t offset) {
-    
+// dtor
+EmbeddingHolder::~EmbeddingHolder() {
+    if (buf_) {
+        buf_->Unref();
+    }
+}
+
+float* EmbeddingHolder::gather_embedding(int64_t offset) {
+    auto ptr = buf_->base<float>();
+    ptr += offset;
+    return ptr;
 }
 
 }  // namespace common

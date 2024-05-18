@@ -19,7 +19,7 @@ using DataType = tensorflow::DataType;
  * Memory Block Buffer which may holds elements' embeddings (array float) or
  * index-graph structrure (arrary int)
  */
-class Buffer : tensorflow::core::RefCounted {
+class Buffer : public tensorflow::core::RefCounted {
   public:
     explicit Buffer(void* data_ptr) : data_(data_ptr) {}
     ~Buffer() {}

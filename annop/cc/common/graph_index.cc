@@ -5,7 +5,7 @@
  * @LastEditTime: 2024-04-25
  */
 
-#include "graph_index.h"
+#include "graph_index.hh"
 
 #include <cstdint>
 
