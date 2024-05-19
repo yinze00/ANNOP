@@ -43,30 +43,51 @@ struct LinkedList<T, typename std::enable_if<std::is_integral<T>::value>::type>
     int m_;
 };
 
+template <typename T>
+struct LinkedListDeleter {
+    void operator()(LinkedList<T>* obj) const { obj->Unref(); }
+};
+
+template <typename T>
+using LinkedListPtr = std::unique_ptr<LinkedList<T>, LinkedListDeleter<T>>;
+
 /*
- * Directed Acyclic Graph, Like NSW, which may has only one layer, we called it
- * level0, level0 contains the whole corpus's linked list (neighbors)
+ * Directed Acyclic Graph, Like NSW, which may has only one layer, we called
+ * it level0, level0 contains the whole corpus's linked list (neighbors)
  */
 class Graph {
   public:
     using LinkedListType = LinkedList<uint32_t>;
+    using LinkedListPtrType = LinkedListPtr<uint32_t>;
 
   public:
     explicit Graph(DataType type, uint64_t n, int m);
     ~Graph();
 
     // get neis
+    void get_label(uint32_t, uint64_t&);
+    uint64_t get_label(uint32_t index) {
+        uint64_t res;
+        get_label(index, res);
+        return res;
+    }
+    void get_labels(const std::vector<uint32_t>&, std::vector<uint64_t>&);
+    std::vector<uint64_t> get_labels(const std::vector<uint32_t>& indice) {
+        std::vector<uint64_t> res;
+        get_labels(indice, res);
+        return res;
+    }
     // set neis
-    
+
+    void set_labels();
 
   protected:
     uint64_t n_{0};  // number of elements
     uint32_t m_{0};  // number of neighbors per element
 
-    std::unique_ptr<LinkedListType> linklist_;
+    LinkedListPtrType linklist_;
 
     std::vector<uint64_t> labels_;
-    std::vector<uint64_t> labels;
 };
 
 /* hierachy Graph like hnsw */

@@ -2,6 +2,7 @@
     "bazel-cpp-tools.compileCommands.targets": [
         "//annop/cc/common:common",
         ":demo",
-        ":load_and_run"
+        ":load_and_run",
+        "//annop/cc/common:common_test"
     ]
   }

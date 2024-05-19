@@ -8,6 +8,8 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <memory>
+#include <vector>
 
 namespace annop {
 namespace common {
@@ -16,6 +18,7 @@ namespace common {
 Graph::Graph(DataType type, uint64_t n, int m) : n_(n), m_(m) {
     labels_.reserve(n);
     linklist_.reset(new LinkedListType(n_, m_));
+    // linklist_ = std::make_unique<LinkedListType>(n, m);
 }
 
 // dtor
@@ -24,6 +27,11 @@ Graph::~Graph() {
         linklist_->Unref();
     }
 }
+
+void Graph::get_label(uint32_t index, uint64_t& label) {}
+
+void Graph::get_labels(const std::vector<uint32_t>& indice,
+                       std::vector<uint64_t>& labels) {}
 
 }  // namespace common
 }  // namespace annop

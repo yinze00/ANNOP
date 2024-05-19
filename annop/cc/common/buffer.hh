@@ -4,7 +4,7 @@
  * @Date: 2024-05-13 23:19:17
  * @LastEditTime: 2024-05-13
  */
-
+#pragma once 
 #include <memory>
 
 #include "tensorflow/core/framework/types.pb.h"
@@ -21,8 +21,12 @@ using DataType = tensorflow::DataType;
  */
 class Buffer : public tensorflow::core::RefCounted {
   public:
-    explicit Buffer(void* data_ptr) : data_(data_ptr) {}
-    ~Buffer() {}
+    explicit Buffer(void* data_ptr) : data_(data_ptr) {
+      LOG(INFO) << "new a Buffer " << this  << std::endl;
+    }
+    ~Buffer() override {
+      LOG(INFO) << "destroy Buffer " << this  << std::endl;
+    }
 
     void* data() const noexcept { return data_; }
 

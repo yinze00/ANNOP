@@ -16,3 +16,15 @@ cc_library(
         "@tensorflow//:tensorflow"
     ]
 )
+
+cc_test(
+    name = "common_test",
+    srcs = [
+        "graph_test.cc",
+    ],
+    deps = [
+        ":common",
+        "@gtest//:gtest",
+        "@gtest//:gtest_main"
+    ]
+)

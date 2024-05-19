@@ -9,6 +9,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
 
 #include "buffer.hh"
 #include "tensorflow/core/framework/types.pb.h"
@@ -28,11 +29,15 @@ class EmbeddingHolder {
     EmbeddingHolder(DataType type, int64_t n, int dim);
     ~EmbeddingHolder();
 
+    void set_embeddings(void* src, size_t bytes) {
+        memcpy(buf_->data(), src, bytes);
+    }
+
     // template <typename T>
     float* gather_embedding(int64_t offset);
 
   private:
-    Buffer* buf_;
+    Buffer* buf_{nullptr};
     DataType type_;
     int64_t n_;
     int dim_;
