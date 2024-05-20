@@ -79,7 +79,11 @@ class Graph {
     }
     // set neis
 
-    void set_labels();
+    void gather_neighbors(size_t index) {}
+
+    void gather_neighbors(const std::vector<size_t>& indice) {}
+
+    void set_labels(std::vector<uint64_t>& labels);
 
   protected:
     uint64_t n_{0};  // number of elements

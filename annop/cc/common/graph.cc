@@ -33,5 +33,7 @@ void Graph::get_label(uint32_t index, uint64_t& label) {}
 void Graph::get_labels(const std::vector<uint32_t>& indice,
                        std::vector<uint64_t>& labels) {}
 
+void Graph::set_labels(std::vector<uint64_t>& labels) { labels_.swap(labels); }
+
 }  // namespace common
 }  // namespace annop
