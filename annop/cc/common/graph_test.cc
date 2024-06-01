@@ -8,7 +8,7 @@
 #include "embedding.hh"
 
 // 定义一个测试用例
-TEST(ExampleTest, Addition) { EXPECT_EQ(2 + 2, 4); }
+// TEST(ExampleTest, Addition) { EXPECT_EQ(2 + 2, 4); }
 
 // Buffer
 namespace annop {

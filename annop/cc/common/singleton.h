@@ -27,7 +27,7 @@ class Singleton {
 
     static T* pinstance() {
         std::call_once(initflags, &Singleton::initSingleton);
-        return instance_;
+        return instance_.get();
     }
 
   private:

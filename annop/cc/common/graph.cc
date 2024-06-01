@@ -18,7 +18,6 @@ namespace common {
 Graph::Graph(DataType type, uint64_t n, int m) : n_(n), m_(m) {
     labels_.reserve(n);
     linklist_.reset(new LinkedListType(n_, m_));
-    // linklist_ = std::make_unique<LinkedListType>(n, m);
 }
 
 // dtor
@@ -34,6 +33,10 @@ void Graph::get_labels(const std::vector<uint32_t>& indice,
                        std::vector<uint64_t>& labels) {}
 
 void Graph::set_labels(std::vector<uint64_t>& labels) { labels_.swap(labels); }
+
+float* Graph::gather_neighbors(size_t index) {return nullptr;}
+
+void Graph::gather_neighbors(const std::vector<size_t>& indice) {}
 
 }  // namespace common
 }  // namespace annop

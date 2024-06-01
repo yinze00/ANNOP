@@ -12,29 +12,42 @@
 #include <string>
 #include <vector>
 
-#include "embedding.h"
-#include "graph.hpp"
+#include "buffer.hh"
+#include "embedding.hh"
+#include "graph.hh"
+#include "tensorflow/core/framework/resource_mgr.h"
 #include "tensorflow/core/framework/types.pb.h"
 #include "tensorflow/core/lib/core/refcount.h"
-
-#include "tensorflow/core/framework/resource_mgr.h"
 
 namespace annop {
 namespace common {
 
 struct IndexConfig {
-
+    DataType itype;
+    DataType dtype;
+    uint64_t n;
+    int dim;
 };
+
 class AIndex {
   public:
     AIndex(const std::string& name, const IndexConfig&);
     AIndex(int n, int dim);
+    ~AIndex() {
+        neis_.reset(nullptr);
+        embedding_.reset(nullptr);
+    }
 
-  private:
+  public:
+    std::string name() { return name_; }
+
+  public:
     std::string name_{"default"};
-    HGraph neis_;
-    Embedding embedding_;
+    std::unique_ptr<HGraph> neis_;
+    std::unique_ptr<EmbeddingHolder> embedding_;
 };
+
+using AIndexPtr = std::shared_ptr<AIndex>;
 
 template <typename T, typename U>
 struct Index {

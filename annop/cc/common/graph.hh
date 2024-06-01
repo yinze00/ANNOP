@@ -34,7 +34,7 @@ struct LinkedList<T, typename std::enable_if<std::is_integral<T>::value>::type>
   public:
     explicit LinkedList(T n, int m) : n_(n), m_(m), Buffer(new T[n * m]) {}
     ~LinkedList() = default;
-    std::tuple<int, T*> gather_neighbors(size_t index) {
+    inline std::tuple<int, T*> gather_neighbors(size_t index) {
         return std::make_tuple(m_, this->template base<T>() + index * m_);
     }
 
@@ -79,9 +79,9 @@ class Graph {
     }
     // set neis
 
-    void gather_neighbors(size_t index) {}
+    float* gather_neighbors(size_t index);
 
-    void gather_neighbors(const std::vector<size_t>& indice) {}
+    void gather_neighbors(const std::vector<size_t>& indice);
 
     void set_labels(std::vector<uint64_t>& labels);
 
@@ -95,7 +95,13 @@ class Graph {
 };
 
 /* hierachy Graph like hnsw */
-class HGraph : public Graph {};
+class HGraph : public Graph {
+  public:
+    HGraph(DataType type, uint64_t n, int m) : Graph(type, n, m) {
+        ;
+        ;
+    }
+};
 
 }  // namespace common
 }  // namespace annop

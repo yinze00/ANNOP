@@ -22,10 +22,10 @@ using DataType = tensorflow::DataType;
 class Buffer : public tensorflow::core::RefCounted {
   public:
     explicit Buffer(void* data_ptr) : data_(data_ptr) {
-      LOG(INFO) << "new a Buffer " << this  << std::endl;
+      // LOG(INFO) << "new a Buffer " << this  << std::endl;
     }
     ~Buffer() override {
-      LOG(INFO) << "destroy Buffer " << this  << std::endl;
+      // LOG(INFO) << "destroy Buffer " << this  << std::endl;
     }
 
     void* data() const noexcept { return data_; }
